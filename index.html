@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr.OXY - Premium Stomatologiya | Toshkent</title>
+    <meta name="description" content="Zamonaviy stomatologiya xizmatlari. Oqartirish, implant, tish tozalash, bolalar stomatologiyasi. +998 88 897 10 24">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #164e63 50%, #0f172a 100%);
+            color: white;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        header {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(34, 194, 255, 0.3);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .header-content {
+            display: flex; justify-content: space-between; align-items: center; padding: 20px 0;
+        }
+        .logo { display: flex; align-items: center; gap: 14px; }
+        .logo-icon {
+            width: 50px; height: 50px;
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            border-radius: 14px; display: flex; align-items: center; justify-content: center;
+            font-size: 28px; box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);
+        }
+        .logo-text h1 {
+            font-size: 28px;
+            background: linear-gradient(135deg, #06b6d4, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .contact-badge {
+            background: rgba(34, 197, 94, 0.2);
+            padding: 10px 20px; border-radius: 30px;
+            border: 1px solid rgba(34, 197, 94, 0.4);
+            font-weight: 600;
+        }
+        .pulse-dot {
+            width: 10px; height: 10px; background: #22c55e;
+            border-radius: 50%; display: inline-block;
+            animation: pulse 2s infinite; margin-right: 8px;
+        }
+        @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.5; } }
+
+        .hero {
+            text-align: center; padding: 80px 0;
+            background: url('https://images.unsplash.com/photo-1629909613654-28e377c2d2a7?w=1920&q=80') center/cover no-repeat;
+            position: relative; border-radius: 20px; margin: 30px 0; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(15, 23, 42, 0.8);
+        }
+        .hero-content { position: relative; z-index: 2; }
+        .hero h1 {
+            font-size: 52px; margin-bottom: 20px;
+            background: linear-gradient(135deg, #06b6d4, #60a5fa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .cta-btn {
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            color: white; border: none; padding: 16px 40px; border-radius: 50px;
+            font-size: 18px; font-weight: 600; cursor: pointer;
+            box-shadow: 0 10px 30px rgba(6, 182, 212, 0.4); transition: all 0.3s;
+        }
+        .cta-btn:hover { transform: translateY(-5px); }
+
+        .section-title {
+            text-align: center; font-size: 38px; margin: 60px 0 40px;
+            background: linear-gradient(135deg, #06b6d4, #60a5fa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px; margin-bottom: 60px;
+        }
+        .service-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 18px; padding: 30px;
+            border: 1px solid rgba(34, 194, 255, 0.3);
+            transition: all 0.3s;
+        }
+        .service-card:hover {
+            border-color: #06b6d4; transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(6, 182, 212, 0.2);
+        }
+        .service-name {
+            font-size: 22px; margin-bottom: 10px; color: #bae6fd;
+        }
+        .price {
+            font-size: 32px; font-weight: 700; color: #06b6d4; margin: 15px 0;
+        }
+        .details-btn {
+            background: rgba(6, 182, 212, 0.3);
+            color: white; border: none; padding: 10px 20px;
+            border-radius: 30px; cursor: pointer; font-weight: 600;
+            margin-top: 15px; transition: all 0.3s;
+        }
+        .details-btn:hover { background: #06b6d4; }
+
+        /* Modal */
+        .modal {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            z-index: 2000; align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #1e293b; border: 1px solid rgba(6, 182, 212, 0.5);
+            border-radius: 20px; padding: 40px; max-width: 600px; width: 100%;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute; top: 15px; right: 20px;
+            background: none; border: none; color: #93c5fd;
+            font-size: 32px; cursor: pointer;
+        }
+        .modal h3 {
+            font-size: 28px; margin-bottom: 20px;
+            background: linear-gradient(135deg, #06b6d4, #60a5fa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .modal ul {
+            list-style: none; margin: 20px 0;
+        }
+        .modal ul li {
+            padding: 8px 0; position: relative; padding-left: 25px;
+        }
+        .modal ul li:before {
+            content: "Check"; position: absolute; left: 0; color: #22c55e;
+        }
+
+        .hours, .contact { background: rgba(6, 182, 212, 0.15); border-radius: 20px; padding: 40px; text-align: center; margin: 60px 0; }
+        .phone { font-size: 36px; font-weight: 700; color: #06b6d4; }
+        .telegram {
+            background: #0088cc; color: white; padding: 12px 30px;
+            border-radius: 50px; text-decoration: none; display: inline-block;
+            margin: 15px; font-weight: 600;
+        }
+
+        footer { text-align: center; padding: 60px 0 40px; }
+        .creator-box {
+            background: rgba(6, 182, 212, 0.2); padding: 30px;
+            border-radius: 18px; max-width: 600px; margin: 40px auto;
+            border: 1px solid rgba(6, 182, 212, 0.4);
+        }
+        .creator-name {
+            font-size: 32px; font-weight: 700;
+            background: linear-gradient(135deg, #06b6d4, #60a5fa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 36px; }
+            .modal-content { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">Tooth</div>
+                    <div class="logo-text">
+                        <h1>Dr.OXY</h1>
+                        <p>Premium Stomatologiya</p>
+                    </div>
+                </div>
+                <div class="contact-badge">
+                    <span class="pulse-dot"></span> Hozir ochiq
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Dr.OXY – Sizning Tabassumingiz Uchun Eng Yaxshi Tanlov</h1>
+                <p>Zamonaviy uskunalar, tajribali shifokorlar va og‘riqsiz davolanish</p>
+                <button class="cta-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">
+                    Yozilish
+                </button>
+            </div>
+        </section>
+
+        <h2 class="section-title">Xizmatlar va Narxlar</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3 class="service-name">Tish Tozalash (Professional)</h3>
+                <div class="price">250,000 so‘m</div>
+                <p>Ultrasonik + AirFlow texnologiyasi</p>
+                <button class="details-btn" onclick="openModal('tozalash')">Batafsil</button>
+            </div>
+
+            <div class="service-card">
+                <h3 class="service-name">Tish Oqartirish (Zoom)</h3>
+                <div class="price">1,800,000 so‘m</div>
+                <p>8 tonnagacha oqartirish</p>
+                <button class="details-btn" onclick="openModal('oqartirish')">Batafsil</button>
+            </div>
+
+            <div class="service-card">
+                <h3 class="service-name">Plomba (Kompozit)</h3>
+                <div class="price">450,000 – 850,000 so‘m</div>
+                <p>Estetik va mustahkam</p>
+                <button class="details-btn" onclick="openModal('plomba')">Batafsil</button>
+            </div>
+
+            <div class="service-card">
+                <h3 class="service-name">Implant (Koreya/Italiya)</h3>
+                <div class="price">4,500,000 – 8,000,000 so‘m</div>
+                <p>Umrbod kafolat</p>
+                <button class="details-btn" onclick="openModal('implant')">Batafsil</button>
+            </div>
+
+            <div class="service-card">
+                <h3 class="service-name">Bolalar Stomatologiyasi</h3>
+                <div class="price">200,000 so‘mdan boshlab</div>
+                <p>Qiziqarli muhitda davolash</p>
+                <button class="details-btn" onclick="openModal('bolalar')">Batafsil</button>
+            </div>
+
+            <div class="service-card">
+                <h3 class="service-name">Veneer / Lumineer</h3>
+                <div class="price">3,500,000 so‘m / tish</div>
+                <p>Gollivud tabassumi</p>
+                <button class="details-btn" onclick="openModal('veneer')">Batafsil</button>
+            </div>
+        </div>
+
+        <div class="hours">
+            <h3>Ish Vaqti</h3>
+            <p><strong>Dushanba – Shanba:</strong> 09:00 – 20:00</p>
+            <p><strong>Yakshanba:</strong> 10:00 – 16:00</p>
+        </div>
+
+        <section class="contact" id="contact">
+            <h2>Biz Bilan Bog‘laning</h2>
+            <div class="phone">+998 88 897 10 24</div>
+            <p>Har kuni 08:00 – 22:00 gacha javob beramiz</p>
+            <a href="https://t.me/Khumoyun02" target="_blank" class="telegram">Telegram orqali yozish</a>
+        </section>
+
+        <footer>
+            <h3>Dr.OXY – Sizning Sog‘lom Tabassumingiz</h3>
+            <div class="creator-box">
+                <p style="color: #93c5fd;">Sayt yaratuvchisi:</p>
+                <div class="creator-name">TH_CLAY</div>
+                <p style="color: #93c5fd; margin-top: 15px;">© 2025 Barcha huquqlar himoyalangan</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="serviceModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">×</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const services = {
+            tozalash: {
+                title: "Professional Tish Tozalash",
+                price: "250,000 so‘m",
+                time: "40-60 daqiqa",
+                desc: "<ul><li>Ultrasonik tozalash (tosh va pigmentlarni olib tashlash)</li><li>AirFlow – nozik qum bilan polishing</li><li>Fluor bilan mustahkamlash</li><li>6 oygacha yangi tish effekti</li><li>100% og‘riqsiz</li></ul><p><strong>Kafolat:</strong> 6 oy</p>"
+            },
+            oqartirish: {
+                title: "Zoom Oqartirish",
+                price: "1,800,000 so‘m",
+                time: "90 daqiqa",
+                desc: "<ul><li>8 tonnagacha oqartirish</li><li>AQShning eng mashhur Zoom tizimi</li><li>Maxsus himoya gel bilan milklar himoyasi</li><li>Natija 5-7 yil saqlanadi</li><li>Seansdan keyin oq rangli parhez 7 kun</li></ul><p><strong>Kafolat:</strong> 2 yil</p>"
+            },
+            plomba: {
+                title: "Kompozit Plomba",
+                price: "450,000 – 850,000 so‘m",
+                time: "30-90 daqiqa",
+                desc: "<ul><li>Eng yangi nano-kompozit materiallar (3M, Dentsply)</li><li>Tish rangiga 100% moslashuv</li><li>5-10 yil xizmat qiladi</li><li>Ko‘rinmaydigan plombalar</li></ul><p><strong>Kafolat:</strong> 3 yil</p>"
+            },
+            implant: {
+                title: "Tish Implantatsiyasi",
+                price: "4,500,000 – 8,000,000 so‘m",
+                time: "2-6 oy (bosqichma-bosqich)",
+                desc: "<ul><li>Koreya (Megagen) va Italiya (BTK) implantlari</li><li>Umrbod kafolat</li><li>3D rejalashtirish va shablon yordamida aniqlik</li><li>Ko‘pchilik hollarda suyak qo‘shishsiz</li></ul><p><strong>Kafolat:</strong> Umrbod</p>"
+            },
+            bolalar: {
+                title: "Bolalar Stomatologiyasi",
+                price: "200,000 so‘mdan boshlab",
+                time: "20-60 daqiqa",
+                desc: "<ul><li>Multfilm ko‘rsatib davolash</li><li>Og‘riqsiz behushlik</li><li>Sovg‘a va diplom beramiz</li><li>Ota-onalar kutish xonasida kutishi mumkin</li></ul><p><strong>Kafolat:</strong> 1 yil</p>"
+            },
+            veneer: {
+                title: "Veneer / Lumineer",
+                price: "3,500,000 so‘m / tish",
+                time: "2-3 seans",
+                desc: "<ul><li>Eng nozik (0.3 mm) E-max va Lumineer</li><li>Tishni deyarli o‘zgartirmasdan</li><li>Gollivud tabassumi effekti</li><li>15-20 yil xizmat</li></ul><p><strong>Kafolat:</strong> 10 yil</p>"
+            }
+        };
+
+        function openModal(id) {
+            const s = services[id];
+            document.getElementById('modalBody').innerHTML = `
+                <h3>${s.title}</h3>
+                <p><strong>Narxi:</strong> ${s.price}</p>
+                <p><strong>Davomiyligi:</strong> ${s.time}</p>
+                ${s.desc}
+                <p style="margin-top:20px; color:#86efac; font-weight:600;">
+                    Yozilish uchun: +998 88 897 10 24 yoki Telegram @Khumoyun02
+                </p>
+            `;
+            document.getElementById('serviceModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('serviceModal').classList.remove('active');
+        }
+
+        // Modal tashqariga bosilganda yopiladi
+        document.getElementById('serviceModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+    </script>
+</body>
+</html>
